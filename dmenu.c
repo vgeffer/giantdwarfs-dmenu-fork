@@ -619,7 +619,7 @@ setup(void)
 	utf8 = XInternAtom(dpy, "UTF8_STRING", False);
 
 	/* calculate menu geometry */
-	bh = drw->fonts->h + 2;
+	bh = drw->fonts->h + 2; //<< HERE BH IS SET
 	lines = MAX(lines, 0);
 	mh = (lines + 1) * bh;
 #ifdef XINERAMA
@@ -660,7 +660,8 @@ setup(void)
 			    parentwin);
 		x = 0;
 		y = topbar ? 0 : wa.height - mh;
-		mw = wa.width;
+		
+		mw = bar_width < 0 ? wa.width : (bar_width); 
 	}
 	promptw = (prompt && *prompt) ? TEXTW(prompt) - lrpad / 4 : 0;
 	inputw = MIN(inputw, mw/3);
